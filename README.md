@@ -6,6 +6,7 @@
 
 ```bash
 bpipe -s "#myInput" -e "keyup" | less
+echo "hello there" | bpipe -s "#myDiv"
 ````
 
 # Installation
