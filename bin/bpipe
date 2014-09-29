@@ -46,7 +46,7 @@ stream.on('error', function(err){
 });
 
 if (command.selector && command.event) {
-  console.log('writing command', command)
+  //console.log('writing command', command)
   stream.write(JSON.stringify(command))
 }
 
