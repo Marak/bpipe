@@ -2,7 +2,11 @@
 
 ## Browser <==> Unix Pipes
 
-`bpipe` is a command line tool which allows you to create readable and writable streams between standard Unix Pipes and the browser.
+`bpipe` is a command line tool which allows you to create readable and writable streams between standard Unix Pipes and the browser and run commands like this:
+
+```bash
+bpipe -s "#myInput" -e "keyup" | less
+````
 
 # Installation
 
