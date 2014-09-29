@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+var server = require('../lib/server');
+var program = require('commander');
+
+program
+  .version('0.0.0')
+  .option('-p, --port <n>', 'Specify listening port', parseInt)
+  // .option('-h, --host [host]', 'Specify listening host')
+  .parse(process.argv);
+
+var opts = {};
+
+if (program.port) {
+  opts.port = program.port;
+}
+
+server.start(opts, function (err, server){
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log('bpipe ws server started on port ' + server.address().port);
+});

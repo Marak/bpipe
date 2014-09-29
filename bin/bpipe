@@ -1,0 +1,73 @@
+#!/usr/bin/env node
+
+var ws = require('websocket-stream');
+var through = require('through2');
+
+var program = require('commander');
+
+program
+  .version('0.0.0')
+  .option('-s, --selector [string]', 'The CSS selector to attach to', String)
+  .option('-e, --event [string]', 'The DOM event to attach', String)
+  .option('-u, --url [string]', 'The url to connect to', String)
+  // .option('-h, --host [host]', 'Specify listening host')
+
+program.parse(process.argv);    
+  
+   var uri,
+    selector = program.selector || "",
+    event = program.event || "",
+    url = program.url || "default";
+
+if (typeof program.args[0]  !== "undefined"){
+  uri = "ws://" + program.args[0];
+} else {
+  uri = "ws://localhost:8001";
+}
+
+var stream;
+
+stream = ws(uri);
+
+var command = {
+  "selector": selector,
+  "event": event,
+  "source": "bpipe",
+  "url": url
+};
+
+stream.on('error', function(err){
+  if (err.code = "ECONNREFUSED") {
+    console.log('Unable to connect to bpipe server. Try running `bpipe-server`.')
+    process.exit();
+  } else {
+    throw err;
+  }
+});
+
+if (command.selector && command.event) {
+  console.log('writing command', command)
+  stream.write(JSON.stringify(command))
+}
+
+// pipe any STDIN data to bpipe server
+process.stdin.pipe(through(function(chunk, enc, cb){
+  var data = {
+    "source": "bpipe",
+    "selector": selector,
+    "data": chunk.toString(),
+    "url": url
+  };
+  cb(null, JSON.stringify(data));
+})).pipe(stream);
+
+
+
+// write all incoming data to STDOUT
+stream.pipe(through(function(chunk, enc, cb){
+  var data = JSON.parse(chunk.toString());
+  process.stdout.write(data.data + "\n")
+  cb();
+}));
+
+// create stream to local server

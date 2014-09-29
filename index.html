@@ -1,0 +1,35 @@
+<html>
+  <head>
+    
+  </head>
+  <body>
+    
+    <h1>bpipe demo</h1>
+    <form>
+      <hr/>
+      
+      #myInput <input id="myInput" type="text" value="" placeholder="enter text"/> <br/>
+      Listen for text updates on myInput, pipe them to less <br/><code>bpipe -s "#myInput" -e "keyup" | less</code>
+      <hr/>
+      #mySelect <select id="mySelect">
+        <option value="Orange">Orange</option>
+        <option value="Red">Red</option>
+        <option value="Blue">Blue</option>
+      </select>
+      <br/>
+      Listen for change events on #mySelect <br/> <code>bpipe -s "#mySelect" -e "change" | less</code><br/>
+      <hr/>
+      
+    
+    #myDiv <div id="myDiv"></div> 
+    Send data to #myDiv from echo <br/> <code>echo "hello there" | bpipe -s "#myDiv"</code>
+    <hr/>
+    
+    <br/>
+  </form>
+    
+    
+    <script src="bundle.js" type="text/javascript"></script>
+    
+  </body>
+</html>
