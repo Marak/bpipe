@@ -10,7 +10,7 @@ bpipe -s "#myInput" -e "keyup" | less
 
 # Installation
 
-```
+```bash
 npm install bpipe -g
 ```
 
@@ -48,7 +48,7 @@ open index.html
 
 ### Pipe data from a text `<input>` to `less`
 
-```
+```bash
 bpipe -s "#myInput" -e "keyup" | less
 ```
 
@@ -59,7 +59,7 @@ bpipe -s "#myInput" -e "keyup" | less
 
 ### Pipe data from a `<select>` box to `less`
 
-```
+```bash
 bpipe -s "#mySelect" -e "change" | less
 ```
 
@@ -73,7 +73,7 @@ bpipe -s "#mySelect" -e "change" | less
 
 ### Pipe data from `echo` to a div's innerHTML
   
-```
+```bash
 echo "hello there" | bpipe -s "#myDiv"
 ```
 
@@ -93,7 +93,7 @@ In the not so distant future perhaps browsers will natively support this type of
 Of course! You can use any standard Unix tool. If you want to use `tail` it should work by creating a temporary file or named piped.
 `less` also works pretty well.
 
-```
+```bash
 node bpipe.js -s "#mySelect" -e "change" > /tmp/select.log
 tail -f /tmp/select.log
 ```
