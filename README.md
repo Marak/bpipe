@@ -95,7 +95,7 @@ Of course! You can use any standard Unix tool. If you want to use `tail` it shou
 `less` also works pretty well.
 
 ```bash
-node bpipe.js -s "#mySelect" -e "change" > /tmp/select.log
+bpipe -s "#mySelect" -e "change" > /tmp/select.log
 tail -f /tmp/select.log
 ```
 
