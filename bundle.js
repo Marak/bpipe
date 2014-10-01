@@ -25,9 +25,13 @@ stream.on('data', function(x) {
   var data = JSON.parse(x.toString());
   var selector = data.selector;
 
+  if (typeof selector === "undefined" || selector.length === 0) {
+    selector = "body";
+  }
+
   // if there is no data, assume its a request to bind a new event listerer from bpipe
   if (typeof data.data === "undefined") {
-    var inputElement =  document.querySelectorAll(selector)[0];
+    var inputElement =  document.querySelectorAll(selector)[0]; // TODO: forEach on the elements, instead of just acting on first matching element
     var inputStream = domstream.createEventStream(inputElement, data.event);
     // console.log('mapping new element', inputElement, selector)
     inputStream.pipe(through(function(chunk, enc, cb){
@@ -44,7 +48,7 @@ stream.on('data', function(x) {
     // data incoming from bpipe, send it to the browser
     var outputElement = document.querySelectorAll(selector)[0];
     var outputStream =  domstream.createWriteStream(outputElement, 'text/plain');
-    //console.log('incoming data from bpipe', data, outputElement);
+    // console.log('incoming data from bpipe', data, outputElement);
     outputStream.write(data.data);
   }
 });
