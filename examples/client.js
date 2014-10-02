@@ -38,7 +38,7 @@ var through = require('through2');
 
   });
   */
-  
+
   /*
   // can send HTML to an an element by ID on the browser
   client = bpipeClient.connect({ 
@@ -58,5 +58,47 @@ var through = require('through2');
     t.equal(err, null);
     t.end();
   });
-  
+  */
+
+  /*
+  // can listen on a textinput for data
+  client = bpipeClient.connect({
+    uri: "ws://localhost:8001",
+    selector: "#myInput",
+    event: 'change',
+    input: input,
+    output: output
+  }, function (err, _server){
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    output.on('data', function(x){
+      console.log(x.toString())
+    })
+    // after it's connected, try sending a command
+
+  });
+  */
+
+  /*
+  // can listen for form submit
+  client = bpipeClient.connect({
+    uri: "ws://localhost:8001",
+    selector: "form",
+    event: 'submit',
+    input: input,
+    output: output
+  }, function (err, _server){
+    if (err) {
+      console.error(err);
+      return;
+    }
+    output.on('data', function(x){
+      // getting data from the form
+      console.log(x.toString())
+    })
+    // after it's connected, try sending a command
+  });
   */

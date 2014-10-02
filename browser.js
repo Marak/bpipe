@@ -32,10 +32,10 @@ stream.on('data', function(x) {
     var inputElement =  document.querySelectorAll(selector)[0]; // TODO: forEach on the elements, instead of just acting on first matching element
     var inputStream = domstream.createEventStream(inputElement, data.event);
     // console.log('mapping new element', inputElement, selector)
-    inputStream.pipe(through(function(chunk, enc, cb){
+    inputStream.pipe(through.obj(function(data, enc, cb){
       var data = {
         "selector": selector,
-        "data": chunk.toString(),
+        "data": data,
         "source": "browser",
         "url": window.location.href
       };

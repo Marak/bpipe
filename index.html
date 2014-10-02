@@ -8,10 +8,10 @@
     <form>
       <hr/>
       
-      #myInput <input id="myInput" type="text" value="" placeholder="enter text"/> <br/>
+      #myInput <input name="myInput" id="myInput" type="text" value="" placeholder="enter text"/> <br/>
       Listen for text updates on myInput, pipe them to less <br/><code>bpipe -s "#myInput" -e "keyup" | less</code>
       <hr/>
-      #mySelect <select id="mySelect">
+      #mySelect <select name="mySelect" id="mySelect">
         <option value="Orange">Orange</option>
         <option value="Red">Red</option>
         <option value="Blue">Blue</option>
@@ -26,6 +26,7 @@
     <hr/>
     
     <br/>
+    <input type="submit" value="submit"/>
   </form>
     
     
