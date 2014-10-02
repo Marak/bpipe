@@ -2,12 +2,18 @@
 
 ## Browser <==> Unix Pipes
 
+## `v0.0.1`
+
 `bpipe` is a command line tool which allows you to create readable and writable streams between standard Unix Pipes and the browser to run commands like this:
 
 ```bash
 bpipe -s "#myInput" -e "keyup" | less
 echo "hello there" | bpipe -s "#myDiv"
 ````
+
+# Update
+
+Since this project has been receiving a good amount attention I have cleaned up the codebase and started development of version `v0.2.0` at https://github.com/marak/bpipe/tree/v0.2.0
 
 # Installation
 
@@ -131,3 +137,4 @@ The current build is functional, but should be considered experimental. With a l
 ## License
 MIT
 
+a
