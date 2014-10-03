@@ -1,5 +1,7 @@
 var ws = require('websocket-stream');
 var through = require('through2');
+var bpipes = {};
+
 
 // create connection to websocket server
 var stream = ws('ws://localhost:8001');
@@ -29,6 +31,15 @@ stream.on('data', function(x) {
 
   // if there is no data, assume its a request to bind a new event listerer from bpipe
   if (typeof data.data === "undefined") {
+
+    // if event is already bound, don't re-bind it
+    // TODO: instead, delete it and re-bind
+    if (typeof bpipes[selector] === "object") {
+      return;
+    }
+
+    bpipes[selector] = { inputStream: inputStream };
+
     var inputElement =  document.querySelectorAll(selector)[0]; // TODO: forEach on the elements, instead of just acting on first matching element
     var inputStream = domstream.createEventStream(inputElement, data.event);
     // console.log('mapping new element', inputElement, selector)
