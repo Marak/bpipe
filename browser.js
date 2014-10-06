@@ -2,20 +2,41 @@ var ws = require('websocket-stream');
 var through = require('through2');
 var bpipes = {};
 
+var dataplex = require('dataplex');
+var domstream = require('domnode-dom');
+
+var plex = dataplex();
 
 // create connection to websocket server
-var stream = ws('ws://localhost:8001');
+var con = ws('ws://localhost:8001');
+var stream = plex.open('/commands');
+
+/*
+var stream2 = plex.open('/foo');
+stream2.on('error', function(err){
+  console.log('stream2 error', err);
+});
+stream2.pipe(through(function(chunk, enc, file){
+  console.log('got foo data');
+}));
+*/
+
+con.pipe(plex).pipe(con);
 
 stream.on('error', function(err){
-  // console.log(err);
+  console.log('stream error', err);
 });
 
-var domstream = require('domnode-dom');
+con.on('error', function(err){
+  console.log('con error', err);
+});
+
 var hello = {
   "source": "browser",
   "id": new Date().getTime(),
   "url": window.location.href
 };
+
 stream.write(new Buffer(JSON.stringify(hello)))
 
 stream.on('data', function(x) { 

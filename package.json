@@ -13,6 +13,7 @@
   "dependencies": {
     "commander": "^2.3.0",
     "debug": "^2.0.0",
+    "dataplex": "2.3.0",
     "domnode-dom": "0.0.4",
     "minimist": "1.1.0",
     "through2": "0.6.2",

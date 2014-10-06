@@ -51,12 +51,9 @@ var through = require('through2');
       console.error(err);
       return;
     }
+    input.write('hi there');
+    input.end();
 
-    input.write('hi tgere')
-    // after it's connected, try sending a command
-
-    t.equal(err, null);
-    t.end();
   });
   */
 
