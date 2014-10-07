@@ -23,7 +23,7 @@ server.start(opts, function (err, server){
   server.on('wsconnection', function (stream){
     // add the querySelector pipe to /querySelector multiplex channel
     // the querySelector pipe is responsible for connecting DOM events and selectors to streams
-    stream.plex.add('/querySelector', require('../lib/pipes/querySelector')());
+    stream.plex.add('/querySelector', require('../lib/pipes/querySelector/server')());
   });
   console.log('bpipe ws server started on port ' + server.address().port);
 });
